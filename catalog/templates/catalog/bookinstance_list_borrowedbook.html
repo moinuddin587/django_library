@@ -1,0 +1,10 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <ul>
+        {% for book in bookinstance_list %}
+            <li>{{ book.book.title }}- {{ book.borrower }}</li>
+            <a href="{% url 'renew-book-librarian' book.pk %}"> Renew</a>
+        {% endfor %}
+    </ul>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1><strong>Author: {{author.first_name}} {{author.last_name}}</strong></h1>
+    {% if author.date_of_death == None %}
+        <p class="text-muted">{{author.date_of_birth}}-</p>        
+    {% else %}
+        <p class="text-muted">{{author.date_of_birth}}-{{author.date_of_death}}</p>
+    {% endif %}
+    <button class="favorite styled" type="button"><a style="text-decoration: none;" href="{% url 'author-update' author.pk  %}">Update</a></button>
+    <br>
+    <br>
+    <h3>Books</h3>
+    <hr>
+    {% for book in author.book_set.all %}
+    <div style="list-style: none;">
+        <a href="{{book.get_absolute_url}}" style="text-decoration: none;">{{book.title}}</a> ({{book.bookinstance_set.count}})
+        <p>{{book.summary}}</p>
+    </div>
+    {% endfor %}
+    
+{% endblock content %}

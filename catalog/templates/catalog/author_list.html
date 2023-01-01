@@ -1,0 +1,17 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1>Authors:</h1>
+    <ul>
+        {% for author in author_list %}
+            {% if author.date_of_death == None %}
+                <li><a href="{{author.get_absolute_url}}" 
+                    style="text-decoration: none;">{{author.first_name}} {{author.last_name}} ({{author.date_of_birth}}-)</a></li>
+            {% else %}
+            <li><a href="{{author.get_absolute_url}}" style="text-decoration: none;" >{{author.first_name}} {{author.last_name}} ({{author.date_of_birth}}-{{author.date_of_death}})</a></li>
+            {% endif %}
+        {% empty %}
+            <p>No author name is added yet.</p>
+        {% endfor %}
+    </ul>
+{% endblock content %}
